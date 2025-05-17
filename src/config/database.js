@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 
+
 class Database {
   constructor() {
    this.init();
