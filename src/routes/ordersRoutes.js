@@ -1,6 +1,94 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Orders
+ *   description: Rotas para gerenciar pedidos
+ *
+ * /orders:
+ *   get:
+ *     summary: Lista todos os pedidos
+ *     tags: [Orders]
+ *     responses:
+ *       200:
+ *         description: Lista de pedidos retornada com sucesso
+ *   post:
+ *     summary: Cria um novo pedido
+ *     tags: [Orders]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: integer
+ *               products:
+ *                 type: array
+ *                 items:
+ *                   type: integer
+ *     responses:
+ *       201:
+ *         description: Pedido criado com sucesso
+ *
+ * /orders/{id}:
+ *   get:
+ *     summary: Busca um pedido pelo ID
+ *     tags: [Orders]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Pedido encontrado
+ *       404:
+ *         description: Pedido não encontrado
+ *   put:
+ *     summary: Atualiza um pedido pelo ID
+ *     tags: [Orders]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Pedido atualizado com sucesso
+ *   delete:
+ *     summary: Remove um pedido pelo ID
+ *     tags: [Orders]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       204:
+ *         description: Pedido removido com sucesso
+ */
+
+
 const express = require('express');
 const router = express.Router();
 const ordersControllers = require('../controllers/ordersControllers');
+const Authenticated = require('../middlewares/authenticateToken');
+
+// Middleware to authenticate routes
+router.use(Authenticated);
 
 // Route to get all orders
 router.get('/', ordersControllers.findAllOrders);
