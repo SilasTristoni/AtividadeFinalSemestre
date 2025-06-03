@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+app.use(cors());
 const database = require('./config/database.js');
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./docs/swagger.js');
 
 app.use(express.json());
 
@@ -24,13 +24,16 @@ database.db.sync({ alter: true })
     console.error('Erro ao conectar ao banco de dados:', err.message);
   });
 
-const PORT = process.env.PORT || 3000;
-
 app.get('/', (req, res) => {
-  res.send('API final do Jackson rodando!');
+  res.send('API final do Jackson rodando! Docs disponíveis em /api-docs');
 });
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger.js');
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+
 
 app.use('/products', productsRoutes);
 app.use('/users', usersRoutes);
@@ -41,14 +44,7 @@ app.use((req, res, next) => {
   res.status(404).json({ error: 'Rota não encontrada' });
 });
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(err.status || 500).json({
-    message: err.message || 'Algo deu errado!',
-    stack: NODE_ENV === 'production' ? '🥞' : err.stack,
-  });
-});
-
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });

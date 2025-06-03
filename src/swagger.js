@@ -1,3 +1,4 @@
+
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
@@ -14,7 +15,7 @@ const options = {
       },
     ],
   },
-  apis: ['./routes/*.js'], 
+  apis: ['./src/routes/*.js'], // Caminho para os arquivos de rota onde as anotações Swagger estão localizadas
 };
 
 const swaggerSpec = swaggerJsdoc(options);

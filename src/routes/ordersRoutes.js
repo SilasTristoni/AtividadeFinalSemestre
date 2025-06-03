@@ -85,12 +85,9 @@
 const express = require('express');
 const router = express.Router();
 const ordersControllers = require('../controllers/ordersControllers');
-const Authenticated = require('../middlewares/authenticateToken');
 
-// Middleware to authenticate routes
-router.use(Authenticated);
 
-// Route to get all orders
+
 router.get('/', ordersControllers.findAllOrders);
 router.get('/:id', ordersControllers.findOrderById);
 router.post('/', ordersControllers.createOrder);

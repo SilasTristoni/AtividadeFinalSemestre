@@ -84,12 +84,7 @@
 const express = require('express');
 const router = express.Router();
 const productsControllers = require('../controllers/productsControllers');
-const Authenticated = require('../middlewares/authenticateToken');
 
-// Middleware to authenticate routes
-router.use(Authenticated);
-
-// Route to get all products
 router.get('/', productsControllers.findAllProducts);
 router.get('/:id', productsControllers.findProductById);
 router.post('/', productsControllers.createProduct);

@@ -81,12 +81,9 @@
 const express = require('express');
 const router = express.Router();
 const categoriesControllers = require('../controllers/categoriesControllers.js');
-const Authenticated = require('../middlewares/authenticateToken');
+const authenticated = require('../middlewares/authenticateToken.js');
 
-// Middleware to authenticate routes
-router.use(Authenticated);
-
-// Route to get all categories
+router.use(authenticated);
 
 router.get('/', categoriesControllers.findAllCategories);
 router.get('/:id', categoriesControllers.findCategoryById);

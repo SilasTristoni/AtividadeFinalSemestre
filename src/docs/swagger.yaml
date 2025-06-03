@@ -3,7 +3,12 @@ info:
   title: API Final Project
   description: API para gerenciamento de usuários, produtos, pedidos e categorias.
   version: 1.0.0
-servers: []  
+servers:
+  [
+    {
+      "url": "http://localhost:3000",
+    }
+  ]
 
 components:
   securitySchemes:

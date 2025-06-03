@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const saltRounds = 10;
-const JWT_SECRET_KEY = 'secret_key_example';
+const JWT_SECRET_KEY = 'CHAVE SECRETA DO JWT';
 
 class UserController {
     static async register(req, res) {
