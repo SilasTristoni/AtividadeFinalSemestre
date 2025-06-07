@@ -31,6 +31,27 @@
  *       201:
  *         description: Usuário criado com sucesso
  *
+ * /users/login:
+ *   post:
+ *     summary: Faz login do usuário
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Usuário logado com sucesso e token retornado
+ *       401:
+ *         description: Credenciais inválidas
+ *
  * /users/{id}:
  *   get:
  *     summary: Busca um usuário pelo ID
@@ -82,6 +103,7 @@
  *       204:
  *         description: Usuário removido com sucesso
  */
+
 
 const express = require('express');
 const router = express.Router();
