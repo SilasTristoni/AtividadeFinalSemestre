@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./swagger.js');
+const swaggerSpec = require('./config/swagger.js');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

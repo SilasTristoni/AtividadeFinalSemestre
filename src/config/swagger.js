@@ -1,4 +1,3 @@
-
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
@@ -11,11 +10,25 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000', 
+        url: 'http://localhost:3000',
+      },
+    ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {      
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],     
       },
     ],
   },
-  apis: ['./src/routes/*.js'], // Caminho para os arquivos de rota onde as anotações Swagger estão localizadas
+  apis: ['./src/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
