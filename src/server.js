@@ -1,7 +1,5 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
-app.use(cors());
 const database = require('./config/database.js');
 
 app.use(express.json());
@@ -31,9 +29,10 @@ app.get('/', (req, res) => {
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger.js');
 
+app.get('/swagger.json', (req, res) => {
+  res.json(swaggerSpec);
+});
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-
 
 app.use('/products', productsRoutes);
 app.use('/users', usersRoutes);

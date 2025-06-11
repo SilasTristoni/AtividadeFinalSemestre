@@ -1,3 +1,4 @@
+const path = require('path');
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
@@ -8,14 +9,9 @@ const options = {
       version: '1.0.0',
       description: 'Documentação da API final do Jackson',
     },
-    servers: [
-      {
-        url: 'http://localhost:3000',
-      },
-    ],
     components: {
       securitySchemes: {
-        bearerAuth: {      
+        bearerAuth: {
           type: 'http',
           scheme: 'bearer',
           bearerFormat: 'JWT',
@@ -24,13 +20,16 @@ const options = {
     },
     security: [
       {
-        bearerAuth: [],     
+        bearerAuth: [],
       },
     ],
   },
-  apis: ['./src/routes/*.js'],
+  apis: [path.join(__dirname, '../routes/*.js')], // caminho absoluto para pegar as anotações
 };
 
+
+
 const swaggerSpec = swaggerJsdoc(options);
+console.log(JSON.stringify(swaggerSpec, null, 2)); 
 
 module.exports = swaggerSpec;
