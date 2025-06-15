@@ -1,0 +1,132 @@
+📌 Atividade Final de Semestre - API de Autenticação
+Esta é uma API de autenticação desenvolvida como atividade final de semestre.
+A API permite o registro de usuários, login, e verificação de autenticação usando JWT (JSON Web Tokens).
+Além disso, a API gerencia Usuários, Categorias, Produtos e Pedidos (Orders).
+
+✅ Funcionalidades Principais
+Registro de usuários com validação de email e senha.
+
+Login de usuários com geração de token JWT.
+
+Verificação de autenticação via token JWT.
+
+CRUD de Categorias, Produtos e Pedidos.
+
+Associação entre usuários e pedidos, e entre categorias e produtos.
+
+Documentação da API com Swagger.
+
+✅ Dependências
+mysql2: Driver MySQL para Node.js.
+
+sequelize: ORM para Node.js que facilita a interação com o banco de dados.
+
+bcrypt: Biblioteca para hash de senhas.
+
+express: Framework web para Node.js.
+
+jsonwebtoken: Biblioteca para geração e validação de tokens JWT.
+
+swagger-ui-express: Middleware para servir a documentação da API.
+
+swagger-jsdoc: Biblioteca para geração automática da documentação da API.
+
+✅ Instalação de Dependências
+npm install mysql2 sequelize bcrypt express jsonwebtoken swagger-ui-express swagger-jsdoc
+
+✅ Configuração do Banco de Dados
+Crie um banco de dados MySQL chamado:
+FinalProject
+Atualize as credenciais de conexão ao banco no arquivo config/config.js ou onde você estiver configurando o Sequelize.
+
+✅ Execução da API
+node server.js
+A API estará disponível em:
+http://localhost:3000
+
+✅ Documentação Swagger
+A documentação interativa pode ser acessada em:
+http://localhost:3000/api-docs
+
+✅ Testes com Postman
+1) Registro de Usuário
+POST /users
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "email": "joao@example.com",
+  "password": "123456"
+}
+
+2) Login
+POST /users/login
+Content-Type: application/json
+
+{
+  "email": "joao@example.com",
+  "password": "123456"
+}
+Você receberá um token JWT.
+
+3) Autenticação - Usar o token nas rotas protegidas
+Inclua o token JWT no header das requisições protegidas:
+
+Authorization: Bearer <seu_token_jwt>
+✅ Rotas da API
+🧑‍💻 Usuários
+Método	Rota	Descrição
+GET	/users	Listar todos os usuários
+GET	/users/:id	Buscar usuário por ID
+PUT	/users/:id	Atualizar usuário
+DELETE	/users/:id	Deletar usuário
+GET	/users/:id/orders	Buscar pedidos de um usuário
+
+🔐 Login / Autenticação
+Método	Rota	Descrição
+POST	/users/login	Login do usuário e geração de token JWT
+
+📂 Categorias
+Método	Rota	Descrição
+GET	/categories	Listar todas as categorias
+GET	/categories/:id	Buscar categoria por ID
+POST	/categories	Criar nova categoria
+PUT	/categories/:id	Atualizar categoria
+DELETE	/categories/:id	Deletar categoria
+GET	/categories/:id/products	Listar produtos de uma categoria
+
+📦 Produtos
+Método	Rota	Descrição
+GET	/products	Listar todos os produtos
+GET	/products/:id	Buscar produto por ID
+POST	/products	Criar novo produto
+PUT	/products/:id	Atualizar produto
+DELETE	/products/:id	Deletar produto
+GET	/products/category/:categoryId	Listar produtos por categoria
+GET	/products/order/:orderId	Listar produtos de um pedido
+
+📝 Pedidos (Orders)
+Método	Rota	Descrição
+GET	/orders	Listar todos os pedidos
+GET	/orders/:id	Buscar pedido por ID
+GET	/orders/user/:userId	Buscar pedidos por usuário
+POST	/orders	Criar novo pedido
+PUT	/orders/:id	Atualizar pedido
+DELETE	/orders/:id	Deletar pedido
+
+✅ Exemplo de Criação de Pedido
+
+POST /orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "products": "Notebook Lenovo, Teclado Mecânico"
+}
+
+✅ Observações Finais
+A autenticação JWT protege todas as rotas de manipulação de usuários, categorias, produtos e pedidos.
+
+Teste tudo no Postman incluindo o token no header Authorization.
+
+A documentação Swagger lista todos os endpoints com exemplos.

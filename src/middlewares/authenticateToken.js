@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const JWT_SECRET_KEY = 'CHAVE SECRETA DO JWT'; // ou process.env.JWT_SECRET
+const JWT_SECRET_KEY = 'CHAVE SECRETA DO JWT'; 
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -13,7 +13,7 @@ function authenticateToken(req, res, next) {
       console.error('Erro ao verificar token:', err.message);
       return res.status(403).json({ error: 'Token inválido.' });
     }
-    req.user = { id: decoded.id, name: decoded.name }; // ajuste para bater com o token criado
+    req.user = { id: decoded.id, name: decoded.name };  
     next();
   });
 }
